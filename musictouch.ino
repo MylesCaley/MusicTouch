@@ -212,7 +212,7 @@ void loop()
          
          
          //delay 1 minute but check button -- NICE CODE!
-         for (int i=60; i>0; i++)
+         for (int i=60; i>0; i--)
          {
            if (digitalRead(MUSIC_SELECTION_SWITCH_1)==HIGH && digitalRead(MUSIC_SELECTION_SWITCH_3)==HIGH)
            {
