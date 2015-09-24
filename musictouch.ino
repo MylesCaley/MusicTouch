@@ -43,12 +43,16 @@
 #define TS_MAXY 913*2
 
 
-#define MUSIC_CONTROL_SWITCH 2
-#define LED_CONTROL 3
-#define MUSIC_SELECTION_SWITCH_1 8
-#define MUSIC_SELECTION_SWITCH_2 9
+#define MUSIC_CONTROL_SWITCH 3
+#define LED_CONTROL 10
+#define MUSIC_SELECTION_SWITCH_1 0
+#define MUSIC_SELECTION_SWITCH_2 1
 #define MUSIC_SELECTION_SWITCH_3 A4
 #define MUSIC_SELECTION_SWITCH_4 A5
+#define SWOUT0 2
+#define SWOUT1 8
+#define SWOUT2 9
+#define SWOUT3 4
 
 //or better pressure precision, we need to know the resistance
 // between X+ and X- Use any multimeter to read it
@@ -68,11 +72,22 @@ void setup()
     pinMode(MUSIC_SELECTION_SWITCH_2, INPUT_PULLUP);
     pinMode(MUSIC_SELECTION_SWITCH_3, INPUT_PULLUP);
     pinMode(MUSIC_SELECTION_SWITCH_4, INPUT_PULLUP);
+
+    digitalWrite(SWOUT0, LOW);
+    digitalWrite(SWOUT1, LOW);
+    digitalWrite(SWOUT2, LOW);
+    digitalWrite(SWOUT3, LOW);
+    pinMode(SWOUT0, INPUT);
+    pinMode(SWOUT1, INPUT);
+    pinMode(SWOUT2, INPUT);
+    pinMode(SWOUT3, INPUT);
+      
     pinMode(LED_CONTROL, OUTPUT);
     digitalWrite(MUSIC_CONTROL_SWITCH, HIGH);
     strip.begin();
     allOn();
     strip.show();
+    //Serial.begin(9600);
 }
 
 void allOn()
@@ -172,24 +187,44 @@ void loop()
   digitalWrite(MUSIC_CONTROL_SWITCH, HIGH);
   
   
-   if(digitalRead(MUSIC_SELECTION_SWITCH_1)==HIGH)
+   if(digitalRead(MUSIC_SELECTION_SWITCH_1)==LOW)
   {
-    Serial.print("PRESSED 1");
+//    Serial.println("PRESSED 1");
+    digitalWrite(SWOUT0, LOW);
+    pinMode(SWOUT0, OUTPUT);
+    digitalWrite(SWOUT0, LOW);
+    delay(40);
+    pinMode(SWOUT0, INPUT);
     on_1();
   }
-  else if(digitalRead(MUSIC_SELECTION_SWITCH_2)==HIGH)
+  else if(digitalRead(MUSIC_SELECTION_SWITCH_2)==LOW)
   {
-    Serial.print("PRESSED 2");
+  //  Serial.println("PRESSED 2");
+      digitalWrite(SWOUT1, LOW);
+    pinMode(SWOUT1, OUTPUT);
+    digitalWrite(SWOUT1, LOW);
+    delay(40);
+    pinMode(SWOUT1, INPUT);
     on_2();
   }
-  else if(digitalRead(MUSIC_SELECTION_SWITCH_3)==HIGH)
+  else if(digitalRead(MUSIC_SELECTION_SWITCH_3)==LOW)
   {
-    Serial.print("PRESSED 3");
+  //  Serial.println("PRESSED 3");
+      digitalWrite(SWOUT2, LOW);
+    pinMode(SWOUT2, OUTPUT);
+    digitalWrite(SWOUT2, LOW);
+    delay(40);
+    pinMode(SWOUT2, INPUT);
     on_3();
   }
-  else if(digitalRead(MUSIC_SELECTION_SWITCH_4)==HIGH)
+  else if(digitalRead(MUSIC_SELECTION_SWITCH_4)==LOW)
   {
-    Serial.print("PRESSED 4");
+  //  Serial.println("PRESSED 4");
+        digitalWrite(SWOUT3, LOW);
+    pinMode(SWOUT3, OUTPUT);
+    digitalWrite(SWOUT3, LOW);
+    delay(40);
+    pinMode(SWOUT3, INPUT);
     on_4();
   }
 
@@ -218,7 +253,7 @@ void loop()
            //delay 1 minute but check button -- NICE CODE!
            for (int i=60; i>0; i--)
            {
-             if (digitalRead(MUSIC_SELECTION_SWITCH_1)==HIGH && digitalRead(MUSIC_SELECTION_SWITCH_3)==HIGH)
+             if (digitalRead(MUSIC_SELECTION_SWITCH_1)==LOW && digitalRead(MUSIC_SELECTION_SWITCH_3)==LOW)
              {
                 break;
              }
