@@ -196,53 +196,57 @@ void loop()
 
   if (p.z > __PRESURE) 
   {
-     digitalWrite(MUSIC_CONTROL_SWITCH, LOW);
-     pinMode(MUSIC_CONTROL_SWITCH, OUTPUT); 
-     digitalWrite(MUSIC_CONTROL_SWITCH, LOW);
-     Serial.print("PRESSED SCREEN !");
-     allOnRed();
-     for (int i=60; i>0; i--)
+     delay(250);
+     if (p.z > __PRESURE)
      {
-         Tft.fillScreen();
-//       String num = String(i);
-//       char c_num[2];
-//       num.toCharArray(c_num,2);
-//       Tft.drawString(c_num,0,110,19,RED);
-         Tft.drawNumber(i, 0, 110, 19, RED);
-         
-         
-         //delay 1 minute but check button -- NICE CODE!
-         for (int i=60; i>0; i--)
-         {
-           if (digitalRead(MUSIC_SELECTION_SWITCH_1)==HIGH && digitalRead(MUSIC_SELECTION_SWITCH_3)==HIGH)
+       digitalWrite(MUSIC_CONTROL_SWITCH, LOW);
+       pinMode(MUSIC_CONTROL_SWITCH, OUTPUT); 
+       digitalWrite(MUSIC_CONTROL_SWITCH, LOW);
+       Serial.print("PRESSED SCREEN !");
+       allOnRed();
+       for (int i=60; i>0; i--)
+       {
+           Tft.fillScreen();
+  //       String num = String(i);
+  //       char c_num[2];
+  //       num.toCharArray(c_num,2);
+  //       Tft.drawString(c_num,0,110,19,RED);
+           Tft.drawNumber(i, 0, 110, 19, RED);
+           
+           
+           //delay 1 minute but check button -- NICE CODE!
+           for (int i=60; i>0; i--)
            {
-              break;
+             if (digitalRead(MUSIC_SELECTION_SWITCH_1)==HIGH && digitalRead(MUSIC_SELECTION_SWITCH_3)==HIGH)
+             {
+                break;
+             }
+             delay(1000);
            }
-           delay(1000);
-         }
-         
-     }
-     //digitalWrite(MUSIC_CONTROL_SWITCH, HIGH);
-     pinMode(MUSIC_CONTROL_SWITCH, INPUT); 
-     displayMessage();
-     switch (currently_selected)
-     {
-       case 1:
-         on_1();
-         break;
-       case 2:
-         on_2();
-          break;
-        case 3:
-          on_3();
+           
+       }
+       //digitalWrite(MUSIC_CONTROL_SWITCH, HIGH);
+       pinMode(MUSIC_CONTROL_SWITCH, INPUT); 
+       displayMessage();
+       switch (currently_selected)
+       {
+         case 1:
+           on_1();
            break;
-        case 4:
-          on_4();
-          break;
-     }
-     
+         case 2:
+           on_2();
+            break;
+          case 3:
+            on_3();
+             break;
+          case 4:
+            on_4();
+            break;
+       }
+       
+       
+    }
   }
-  
   
   delay(100);
 }
