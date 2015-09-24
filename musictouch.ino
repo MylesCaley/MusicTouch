@@ -197,7 +197,8 @@ void loop()
   if (p.z > __PRESURE) 
   {
      delay(250);
-     if (p.z > __PRESURE)
+     Point p2 = ts.getPoint();
+     if (p2.z > __PRESURE)
      {
        digitalWrite(MUSIC_CONTROL_SWITCH, LOW);
        pinMode(MUSIC_CONTROL_SWITCH, OUTPUT); 
